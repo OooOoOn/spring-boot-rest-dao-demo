@@ -1,6 +1,8 @@
 package com.spring.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -10,15 +12,18 @@ import org.springframework.web.bind.annotation.RestController;
 import com.spring.daoimpl.BookDao;
 import com.spring.model.Book;
 
-@RestController
+@RestController @Component
 public class BookController {
 	
 	@Autowired
 	private BookDao bookDao;
+	
+	@Value("${spring.application.name}")
+	String applicationName;
 		
 	@RequestMapping("/")
 	public String healthCheck() {
-		return "OK";
+		return "This " + applicationName + " is brought to you by OooOoOn";
 	}
 	
 	//Get specific book by isbn number
